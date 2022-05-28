@@ -228,5 +228,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`server listening ${port}`)
 })
-
-assaaa
