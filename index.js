@@ -33,7 +33,6 @@ function verifyJWT(req, res, next) {
     })
 }
 
-
 async function run() {
     try {
         await client.connect();
@@ -95,10 +94,6 @@ async function run() {
             }
         });
 
-
-
-        // PAYMENT
-
         app.post('/create-payment-intent', verifyJWT, async (req, res) => {
             const part = req.body;
             const price = part.price;
@@ -110,9 +105,6 @@ async function run() {
             });
             res.send({ clientSecret: paymentIntent.client_secret })
         });
-
-
-
 
         app.get('/admin/:email', async (req, res) => {
             const email = req.params.email;
@@ -186,8 +178,6 @@ async function run() {
         })
 
 
-
-
         app.get('/api/order/:email', verifyJWT, async (req, res) => {
             const userEmail = req.params.email;
 
@@ -238,3 +228,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`server listening ${port}`)
 })
+
+assaaaaaaaaaaaaa
