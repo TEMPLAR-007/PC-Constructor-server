@@ -3,6 +3,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const dbConnect = require('./utils/dbConnect');
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -13,9 +14,7 @@ app.use(cors());
 app.use(express.json())
 
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ertau.mongodb.net/?retryWrites=true&w=majority`;
-
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+dbConnect();
 
 function verifyJWT(req, res, next) {
     const authHeader = req.headers.authorization;
@@ -225,6 +224,6 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
     console.log(`server listening ${port}`)
 })
